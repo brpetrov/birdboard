@@ -1,0 +1,21 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.site-button {
+    @apply tw-rounded-lg tw-bg-blue-500 tw-text-white tw-px-5 tw-py-2 tw-no-underline hover:tw-bg-blue-600 hover:tw-no-underline hover:tw-text-white tw-text-sm hover:tw-scale-50;
+    box-shadow: 0 2px 7px 0 #b0eaff;
+}
+
+.my-card {
+    @apply tw-bg-white tw-rounded-lg tw-shadow-sm tw-p-4 tw-m-6 lg:tw-m-0;
+}

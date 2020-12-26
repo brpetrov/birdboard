@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56abc574c9c50fc6e4b7f5ef2a76cd50",
+    "content-hash": "e7db46922b8405d61f0c07c0ed9e38ff",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2219,6 +2219,63 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "rogervila/laravel-legacy-ui",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rogervila/laravel-legacy-ui.git",
+                "reference": "a91926949a2d2920df7415c89cb9a5c21612890c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rogervila/laravel-legacy-ui/zipball/a91926949a2d2920df7415c89cb9a5c21612890c",
+                "reference": "a91926949a2d2920df7415c89cb9a5c21612890c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^8.0",
+                "illuminate/filesystem": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\LegacyUi\\UiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\LegacyUi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Legacy UI with Auth scaffolding for Laravel 8",
+            "keywords": [
+                "auth scaffolding",
+                "laravel",
+                "legacy",
+                "ui"
+            ],
+            "time": "2020-11-26T15:15:03+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

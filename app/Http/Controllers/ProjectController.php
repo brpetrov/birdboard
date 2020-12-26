@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProjectController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +22,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        // dd(auth()->user()->projects());
+        $projects = auth()->user()->projects()->get();
         return view('project.index', [
-            'projects' => $projects
+            'projects' => $projects,
         ]);
     }
 
@@ -27,8 +36,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -40,12 +50,13 @@ class ProjectController extends Controller
     {
         $attributes = request()->validate([
             'title' => 'required',
-            'description' => 'required',
+            'description' => 'required|max:100',
+            'notes' => 'min:3'
         ]);
 
         $attributes['owner_id'] = auth()->id();
-        Project::create($attributes);
-        return redirect('/projects');
+        $project = auth()->user()->projects()->create($attributes);
+        return redirect($project->path());
     }
 
     /**
@@ -56,6 +67,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        if (auth()->user()->isNot($project->owner)) {
+            abort(403);
+        }
         return view('project.show', ['project' => $project]);
     }
 
@@ -79,7 +93,19 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        if (auth()->user()->isNot($project->owner)) {
+            abort(403);
+        }
+
+        $request->validate([
+            'notes' => 'required'
+        ]);
+
+        $project->update([
+            'notes' => $request->notes
+        ]);
+
+        return redirect($project->path());
     }
 
     /**

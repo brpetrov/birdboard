@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Birdboard</h1>
+@extends('layouts.app')
+@section('content')
 
-    <ul>
-        @forelse ($projects as $project)
-            <li>
-                <a href="{{$project->path()}}">{{$project->title}}</a>
-            </li>
-        @empty
-        <li>No projects yet.</li>
-        @endforelse
-    </ul>
-</body>
-</html>
+<header class="tw-flex tw-justify-between tw-items-center tw-mb-3 tw-py-3 tw-m-6 lg:tw-m-0">
+    <h2 class="tw-text-gray-400 tw-font-bold hover:tw-no-underline hover:tw-text-gray-500 tw-text-lg">My Projects</h2>
+    <a class="site-button" href="/projects/create" >Add Project</a>
+</header>
+<main class="lg:tw-grid lg:tw-grid-cols-3 lg:tw-gap-5">
+    @forelse ($projects as $project)
+   @include('project.components.card')
+    @empty
+    <div>No projects yet.</div>
+    @endforelse
+</main>
+@endsection
