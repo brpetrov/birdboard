@@ -43,6 +43,13 @@
             @csrf
             @method('PATCH')
             <textarea name="notes" class="my-card tw-w-full" style="min-height: 200px" placeholder="Project notes...">{{$project->notes}}</textarea>
+            @if ($errors->any())
+            <div class="tw-field tw-my-4">
+                @foreach ($errors->all() as $error)
+                    <li class="tw-text-sm tw-text-red-500">{{$error}}</li>
+                @endforeach
+            </div>
+            @endif
             <button type="submit" class="site-button">Save</button>
             </form>
         </div>

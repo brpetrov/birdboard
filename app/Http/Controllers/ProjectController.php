@@ -33,7 +33,7 @@ class ProjectController extends Controller
         $attributes = request()->validate([
             'title' => 'required',
             'description' => 'required|max:100|min:5',
-            'notes' => 'min:3'
+            'notes' => 'nullable'
         ]);
 
         $attributes['owner_id'] = auth()->id();
@@ -68,9 +68,9 @@ class ProjectController extends Controller
         // }
 
         $attributes = request()->validate([
-            'title' => 'required',
-            'description' => 'required|max:100',
-            'notes' => 'min:3'
+            'title' => 'sometimes|required',
+            'description' => 'sometimes|required|max:100',
+            'notes' => 'nullable'
         ]);
         $project->update($attributes);
 
