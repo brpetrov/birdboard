@@ -51,7 +51,16 @@ class ProjectTasksTest extends TestCase
                 'completed' => true
             ]);
 
-        //Coll method made from tutorial
+
+        // This does the same thing as the cool block above but simple and newbie
+        //*************************************************************
+        // $this->signIn();
+        // $project = Project::factory()->create(['owner_id' => auth()->id()]);
+        // $task = $project->addTask('test task');
+        // $this->patch($project->path() . '/tasks/' . $task->id, [
+        //     'body' => 'changed',
+        //     'completed' => true
+        // ]);
 
         $this->assertDatabaseHas('tasks', [
             'body' => 'changed',

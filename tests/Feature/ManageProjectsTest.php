@@ -13,6 +13,16 @@ class ManageProjectsTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
+    // public function test_guests_cannot_manage_projects()
+    // {
+    //     $project = Project::factory()->create();
+    //     $this->get('/projects')->assertRedirect('login');
+    //     $this->get('/projects/create',)->assertRedirect('login');
+    //     $this->get($project->path() . '/edit')->assertRedirect('login');
+    //     $this->get($project->path())->assertRedirect('login');
+    //     $this->post('/projects', $project->toArray())->assertRedirect('login');
+    // }
+
 
     public function test_guests_cannot_create_projects()
     {
@@ -59,17 +69,19 @@ class ManageProjectsTest extends TestCase
             ->assertSee($attributes['notes']);
     }
 
-    public function test_a_user_can_update_project()
+    public function test_a_user_can_update_a_project()
     {
         $this->signIn();
         $this->withoutExceptionHandling();
         $project = Project::factory()->create(['owner_id' => auth()->id()]);
 
-        $this->patch($project->path(), [
-            'notes' => 'Changed'
+        $this->patch($project->path(), $attributes = [
+            'title' => 'Changed', 'description' => 'Changed', 'notes' => 'Changed'
         ])->assertRedirect($project->path());
 
-        $this->assertDatabaseHas('projects', ['notes' => 'Changed']);
+        $this->get($project->path() . '/edit')->assertStatus(200);
+
+        $this->assertDatabaseHas('projects', $attributes);
 
         // $this->assertRedirect($project->path());
     }

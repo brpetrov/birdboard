@@ -2,7 +2,7 @@
 @section('content')
 <header class="lg:tw-flex tw-justify-between tw-items-center tw-mb-3 tw-py-3 tw-m-6 lg:tw-m-0">
     <p class="tw-text-gray-400 tw-font-bold hover:tw-no-underline tw-text-lg tw-mb-4 lg:tw-mb-0"><a class="tw-text-blue-500" href="/projects">My Projects</a> / {{$project->title}}</p>
-    <a class="site-button" href="/projects/create">New Project</a>
+    <a class="site-button" href="{{$project->path()}}/edit">Edit Project</a>
 </header>
 
 <main>

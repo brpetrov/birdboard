@@ -11,15 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         // dd(auth()->user()->projects());
@@ -29,28 +21,18 @@ class ProjectController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('project.create');
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $attributes = request()->validate([
             'title' => 'required',
-            'description' => 'required|max:100',
+            'description' => 'required|max:100|min:5',
             'notes' => 'min:3'
         ]);
 
@@ -59,12 +41,7 @@ class ProjectController extends Controller
         return redirect($project->path());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Project $project)
     {
         if (auth()->user()->isNot($project->owner)) {
@@ -73,47 +50,33 @@ class ProjectController extends Controller
         return view('project.show', ['project' => $project]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Project $project)
     {
-        //
+        return view('project.edit', ['project' => $project]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Project $project)
+    public function update(Project $project)
     {
         if (auth()->user()->isNot($project->owner)) {
             abort(403);
         }
 
-        $request->validate([
-            'notes' => 'required'
-        ]);
+        // Same as above
+        // if (auth()->user() == !$project->owner) {
+        //     abort(403);
+        // }
 
-        $project->update([
-            'notes' => $request->notes
+        $attributes = request()->validate([
+            'title' => 'required',
+            'description' => 'required|max:100',
+            'notes' => 'min:3'
         ]);
+        $project->update($attributes);
 
         return redirect($project->path());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Project $project)
     {
         //
