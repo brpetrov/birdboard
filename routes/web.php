@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Activity;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
