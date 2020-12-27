@@ -39,7 +39,7 @@ class ProjectTasksTest extends TestCase
             ->assertSee('test task');
     }
 
-    public function test_a_task_can_be_updated()
+    public function test_a_task_body_can_be_updated()
     {
 
         // cool method created in tutorial. do not know the benefits of it other than it looks cleaner (I will never remember how it's made)
@@ -48,7 +48,6 @@ class ProjectTasksTest extends TestCase
         $this->actingAs($project->owner)
             ->patch($project->tasks->first()->path(), [
                 'body' => 'changed',
-                'completed' => true
             ]);
 
 
@@ -64,9 +63,53 @@ class ProjectTasksTest extends TestCase
 
         $this->assertDatabaseHas('tasks', [
             'body' => 'changed',
+        ]);
+    }
+
+    public function test_a_task_can_be_completed()
+    {
+
+        // cool method created in tutorial. do not know the benefits of it other than it looks cleaner (I will never remember how it's made)
+        //  EDIT: we created a folder Setup and MyProjectFactory.php look there for more info
+
+        $project = MyProjectFactory::withTasks(1)->create();
+
+        $this->actingAs($project->owner)
+            ->patch($project->tasks->first()->path(), [
+                'body' => 'changed',
+                'completed' => true
+            ]);
+
+        $this->assertDatabaseHas('tasks', [
+            'body' => 'changed',
             'completed' => true
         ]);
     }
+
+    public function test_a_task_can_be_marked_as_incomplete()
+    {
+
+        $project = MyProjectFactory::withTasks(1)->create();
+
+        $this->actingAs($project->owner)
+            ->patch($project->tasks->first()->path(), [
+                'body' => 'changed',
+                'completed' => true
+            ]);
+
+
+        $this->patch($project->tasks->first()->path(), [
+            'body' => 'changed',
+            'completed' => false
+        ]);
+
+
+        $this->assertDatabaseHas('tasks', [
+            'body' => 'changed',
+            'completed' => false
+        ]);
+    }
+
 
     public function test_only_the_owner_of_a_project_may_update_tasks()
     {

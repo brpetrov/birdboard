@@ -28,11 +28,32 @@ class Project extends Model
     public function addTask($body)
     {
         return $this->tasks()->create(compact('body'));
-        //fancy way from tutorial
     }
 
     public function activity()
     {
         return $this->hasMany(Activity::class);
     }
+
+    public function recordActivity($description)
+    {
+        // $this->activity()->create(['description' => $description]);
+        // or
+        $this->activity()->create(compact('description'));
+    }
+
+
+    // I did the same thing as the methods in the ProjectObserver just to experiment
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::created(function ($project) {
+    //         $project->recordActivity('created');
+    //     });
+
+    //     static::updated(function ($project) {
+    //         $project->recordActivity('updated');
+    //     });
+    // }
 }

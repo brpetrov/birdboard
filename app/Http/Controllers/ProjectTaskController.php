@@ -38,10 +38,18 @@ class ProjectTaskController extends Controller
             'body' => 'required'
         ]);
 
-        $task->update([
-            'body' => request('body'),
-            'completed' => request()->has('completed')
-        ]);
+        // fancy way from tutorial-> we created complete() method inside Task model
+        $task->update(['body' => request('body')]);
+        if (request('completed')) {
+            $task->complete();
+        } else {
+            $task->incomplete();
+        }
+        // NORMAL WAY
+        // $task->update([
+        //     'body' => request('body'),
+        //     'completed' => request()->has('completed')
+        // ]);
         return redirect($project->path());
     }
 }
