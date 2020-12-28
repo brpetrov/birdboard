@@ -55,6 +55,7 @@
         </div>
         <div class="lg:tw-w-1/4 tw-px-3">
             @include('project.components.card')
+            @include('project.components.activity')
         </div>
     </div>
 </main>

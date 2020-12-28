@@ -32,7 +32,7 @@ class Project extends Model
 
     public function activity()
     {
-        return $this->hasMany(Activity::class);
+        return $this->hasMany(Activity::class)->latest();
     }
 
     public function recordActivity($description)
@@ -43,7 +43,8 @@ class Project extends Model
     }
 
 
-    // I did the same thing as the methods in the ProjectObserver just to experiment
+    // I did the same thing as the methods in the ProjectObserver just to experiment. Creating an Observer is
+    //easier and cleaner BUT MAKE SURE you include it inside AppServiceProvider booth() !!!
     // protected static function boot()
     // {
     //     parent::boot();
