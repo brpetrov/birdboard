@@ -7,9 +7,9 @@
 
 <main>
     <div class="lg:tw-flex tw--mx-3">
-        <div class="lg:tw-w-3/4 tw-px-3">
+        <div class="tw-container tw-mx-auto lg:tw-w-3/4 tw-px-3">
             <div class="tw-mb-8">
-            <h2 class="tw-text-gray-400 tw-font-bold hover:tw-no-underline tw-text-lg tw-mb-3">Tasks</h2>
+            <h2 class="tw-text-gray-400 tw-font-bold hover:tw-no-underline tw-text-lg tw-mb-3 tw-ml-3">Tasks</h2>
             {{-- tasks --}}
                 @foreach ($project->tasks as $task)
 
@@ -30,7 +30,7 @@
                 <div class="my-card tw-mb-3">
                     <form method="POST" action="{{$project->path().'/tasks'}}">
                         @csrf
-                        <input id="body" name="body" type="text" class="tw-w-full tw-h-7 inline tw-outline-none"  placeholder="Add a new task...">
+                        <input id="body" name="body" type="text" class="tw-w-full tw-h-7 inline tw-outline-none"  placeholder="Add a new task... and press *ENTER*">
                     </form>
 
                 </div>
@@ -38,11 +38,13 @@
 
             </div>
 
-            <h2 class="tw-text-gray-400 tw-font-bold hover:tw-no-underline tw-text-lg tw-mb-3">General Notes</h2>
+            <h2 class="tw-text-gray-400 tw-font-bold hover:tw-no-underline tw-text-lg tw-mb-3 tw-ml-3">General Notes</h2>
             <form method="POST" action="{{$project->path()}}">
             @csrf
             @method('PATCH')
-            <textarea name="notes" class="my-card tw-w-full" style="min-height: 200px" placeholder="Project notes...">{{$project->notes}}</textarea>
+            <div class="tw-w-full tw-h-48">
+                <textarea style="resize: none" name="notes" class="my-card tw-w-5/6 md:tw-w-full tw-h-40" placeholder="Project notes...">{{$project->notes}}</textarea>
+            </div>
             @if ($errors->any())
             <div class="tw-field tw-my-4">
                 @foreach ($errors->all() as $error)
