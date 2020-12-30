@@ -30,7 +30,11 @@
                 <div class="my-card tw-mb-3">
                     <form method="POST" action="{{$project->path().'/tasks'}}">
                         @csrf
-                        <input id="body" name="body" type="text" class="tw-w-full tw-h-7 inline tw-outline-none"  placeholder="Add a new task... and press *ENTER*">
+                        <input id="body"
+                            name="body"
+                            type="text"
+                            class="tw-w-full tw-h-7 inline tw-outline-none"
+                            placeholder="Add a new task... and press *ENTER*">
                     </form>
 
                 </div>

@@ -42,17 +42,21 @@ Route::post('email/resend', [App\Http\Controllers\Auth\VerificationController::c
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/projects', 'ProjectController@index');
-    Route::get('/projects/create', 'ProjectController@create');
-    Route::post('/projects', 'ProjectController@store');
-    Route::get('/projects/{project}', 'ProjectController@show');
-    Route::get('/projects/{project}/edit', 'ProjectController@edit');
+    // Route::get('/projects', 'ProjectController@index');
+    // Route::get('/projects/create', 'ProjectController@create');
+    // Route::post('/projects', 'ProjectController@store');
+    // Route::get('/projects/{project}', 'ProjectController@show');
+    // Route::get('/projects/{project}/edit', 'ProjectController@edit');
+    // Route::patch('/projects/{project}', 'ProjectController@update');
+    // Route::delete('/projects/{project}', 'ProjectController@destroy');
 
-    Route::patch('/projects/{project}', 'ProjectController@update');
+    Route::resource('projects', 'ProjectController');
 
 
     Route::post('/projects/{project}/tasks', 'ProjectTaskController@store');
     Route::patch('/projects/{project}/tasks/{task}', 'ProjectTaskController@update');
+
+
 
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
